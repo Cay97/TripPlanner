@@ -1,1 +1,3 @@
-I didn't use any AI to write code.
+No AI was used to write code
+
+AI was occassionally used to research the APIs used and find the different functions that I wanted.
