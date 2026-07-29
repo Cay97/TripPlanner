@@ -6,30 +6,29 @@ import { useOutletContext } from "react-router-dom";
 export default function PhotoGrid(props){
 	const {setAlignNavbar} = useOutletContext()
 	//create backend and API for loading photos
-	const {photos, setPhotos} = useState([])
+	const [photos, setPhotos] = useState([])
 
 	useEffect(() => {
 		setAlignNavbar(
 			<Form>
-				<Form.Label htmlFor="searchLoc">Location</Form.Label>
+				<Form.Label htmlFor="searchLoc">Location: </Form.Label>
 				<Form.Control id="searchLoc"/>
-				<Form.Label htmlFor="searchSub">Subject</Form.Label>
-				<Form.Control id="searchSub"/>
-				<Form.Label htmlFor="searchKeys">keywords</Form.Label>
+				<Form.Label htmlFor="searchKeys">Keyword(s): </Form.Label>
 				<Form.Control id="searchKeys"/>
 			</Form>
 		)
 		return () => setAlignNavbar(null)
 	}, [setAlignNavbar])
 
+	
 	return(
 		<div>
-			
-			<Container>
+			{photos.length === 0 ? <h3>No Photos Found</h3> : (<Container>
 				<Row>
 					
 				</Row>
 			</Container>
+		)}
 		</div>
 	)
 }

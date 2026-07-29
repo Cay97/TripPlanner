@@ -10,7 +10,7 @@ export default function SiteStruct(props) {
 			<h1>Trip Planner</h1>
 			<div style={{display:'flex', flexDirection:'row'}}>
 				<TripNavBar />
-				{alignNavbar}
+				<div style={{marginLeft:'auto'}}>{alignNavbar}</div>
 			</div>
 			<Outlet context={{ setAlignNavbar }}/>
 		</div>

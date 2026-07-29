@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Map, Marker, Popup} from 'react-map-gl/maplibre';
+import { Button, Form,} from "react-bootstrap";
 import 'maplibre-gl/dist/maplibre-gl.css';
+
 
 export default function PlanningMap(props){
 	const mapRef = useRef()
@@ -10,6 +12,7 @@ export default function PlanningMap(props){
 		zoom: 4
 	})
 	
+
 	function CheckBounds(){
 		if (mapRef.current){
 			const bounds = mapRef.current.getMap().getBounds();

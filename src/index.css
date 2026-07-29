@@ -67,6 +67,10 @@ body {
   max-height: 100%;
 }
 
+Form {
+  margin-left: auto;
+}
+
 Nav {
   width: 300px;
   text-align: left;
