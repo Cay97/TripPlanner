@@ -13,8 +13,8 @@ export default function PhotoGrid(props){
 			<Form>
 				<Form.Label htmlFor="searchLoc">Location: </Form.Label>
 				<Form.Control id="searchLoc"/>
-				<Form.Label htmlFor="searchKeys">Keyword(s): </Form.Label>
-				<Form.Control id="searchKeys"/>
+				<Form.Label htmlFor="searchTags">Tag(s): </Form.Label>
+				<Form.Control id="searchTags"/>
 			</Form>
 		)
 		return () => setAlignNavbar(null)
