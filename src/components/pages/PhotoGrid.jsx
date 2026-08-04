@@ -20,12 +20,27 @@ export default function PhotoGrid(props){
 		return () => setAlignNavbar(null)
 	}, [setAlignNavbar])
 
+	useEffect(() => {
+		fetch('https://bdlwqkegeqwfsdmexsvc.supabase.co/rest/v1/photos?apikey=sb_publishable_6bwTnT8jQ_8D6yFQF8Nlcw_Ku1dLPAA',{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		}).then(res => res.json()).then(json => {
+			console.log(json)
+			setPhotos(json)
+		})
+	},[])
+
+	let photoList = photos
 	
 	return(
 		<div>
-			{photos.length === 0 ? <h3>No Photos Found</h3> : (<Container>
-				<Row>
-					
+			{photoList.length === 0 ? <h3>No Photos Found</h3> : (<Container fluid>
+				<Row className="g-4">
+					{photoList.map(photo => <Col xs={12} sm={6} md={4} lg={3} xl={3} key={photo.id}>
+					<PhotoCard {...photo}/>
+					</Col> )}
 				</Row>
 			</Container>
 		)}
@@ -33,6 +48,3 @@ export default function PhotoGrid(props){
 	)
 }
 
-// {photos.map(photo => <col xs={12} s={12} md={6} lg={4} xl={2} key={photo.id}>
-// 					<PhotoCard {...photo}/>
-// 					</col> )}
