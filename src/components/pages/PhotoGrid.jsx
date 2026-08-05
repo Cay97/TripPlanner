@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react"
-import { Button, Container, Form, Row, Col} from "react-bootstrap";
+import { Button, Container, Form, Row, Col, Modal} from "react-bootstrap";
 import PhotoCard from "../PhotoCard"
 import { useOutletContext } from "react-router-dom";
+import { SearchForm } from "../SearchForm";
 
 export default function PhotoGrid(props){
 	const {setAlignNavbar} = useOutletContext()
 	//create backend and API for loading photos
 	const [photos, setPhotos] = useState([])
+	const [filterTags, setFilterTags] = useState([])
+	const [filterLocation, setFilterLocation] = useState([])
+
 
 	useEffect(() => {
-		setAlignNavbar(
-			<Form>
-				<Form.Label htmlFor="searchLoc">Location: </Form.Label>
-				<Form.Control id="searchLoc"/>
-				<Form.Label htmlFor="searchTags">Tag(s): </Form.Label>
-				<Form.Control id="searchTags"/>
-			</Form>
-		)
+		setAlignNavbar(<SearchForm setLocation={setFilterLocation} setTags={setFilterTags} />)
 		return () => setAlignNavbar(null)
 	}, [setAlignNavbar])
 
@@ -33,6 +30,12 @@ export default function PhotoGrid(props){
 	},[])
 
 	let photoList = photos
+	if (filterTags.some(val => val !== "")) {
+		photoList = (photoList.filter(photo => filterTags.filter(tag => tag !== "").every(filterTag => photo.tags.some(photoTag => photoTag.toLowerCase().includes(filterTag.toLowerCase())))))
+	}
+	if (filterLocation.some(val => val !== "")){
+		photoList = (photoList.filter(photo => filterLocation.filter(location => location !== "").every(filterLoc => photo.location.some(photoLoc => photoLoc.toLowerCase().includes(filterLoc.toLowerCase())))))
+	}
 	
 	return(
 		<div>

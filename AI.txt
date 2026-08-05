@@ -1,3 +1,4 @@
 No AI was used to write code
 
 AI was occassionally used to research the APIs used and find the different functions that I wanted.
+- assisted with format/implementation of SearchForm component to avoid refresh preventing values being set
