@@ -11,7 +11,21 @@ export default function PlanningMap(props){
 		latitude: 43.1,
 		zoom: 4
 	})
+	const [photos, setPhotos] = useState([])
 	
+	useEffect(() => {
+			fetch('https://bdlwqkegeqwfsdmexsvc.supabase.co/rest/v1/photos?apikey=sb_publishable_6bwTnT8jQ_8D6yFQF8Nlcw_Ku1dLPAA',{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			}).then(res => res.json()).then(json => {
+				console.log(json)
+				setPhotos(json)
+			})
+		},[])
+
+	let photoList = photos
 
 	function CheckBounds(){
 		if (mapRef.current){
@@ -27,6 +41,8 @@ export default function PlanningMap(props){
 
 	}
 
+	
+
 	return(
 		<div style={{ height: '85vh', width: '100%' }}>
 			<Map
@@ -36,7 +52,9 @@ export default function PlanningMap(props){
 					CheckBounds()
 					setMapState(evt.viewState)}}
 				mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
-			/>
+			>
+				{photoList.map(photo => <Marker key={photo.id} longitude={photo.longitude} latitude={photo.latitude} anchor="bottom"></Marker>)}
+			</Map>
 		</div>
 	)
 }
