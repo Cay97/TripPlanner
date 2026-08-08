@@ -6,6 +6,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 
 export default function PlanningMap(props){
 	const mapRef = useRef()
+	const [popupData, setPopupData] = useState(null)
 	const [mapState, setMapState] = useState({
 		longitude: -89.4,
 		latitude: 43.1,
@@ -53,7 +54,43 @@ export default function PlanningMap(props){
 					setMapState(evt.viewState)}}
 				mapStyle="https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json"
 			>
-				{photoList.map(photo => <Marker key={photo.id} longitude={photo.longitude} latitude={photo.latitude} anchor="bottom"></Marker>)}
+				{photoList.map(photo => <Marker key={photo.id} longitude={photo.longitude} 
+				latitude={photo.latitude} anchor="center" onClick={e => {
+					e.originalEvent.stopPropagation();
+					setPopupData(photo)
+				}}></Marker>)}
+				{popupData && (
+					<Popup
+						anchor="center"
+						longitude={Number(popupData.longitude)}
+						latitude={Number(popupData.latitude)}
+						onClose={() => setPopupData(null)}
+					>
+						<div>
+							<h3 style={{textAlign:'center'}}>{popupData.name}</h3>
+							<p><strong>Latitude: </strong>{popupData.latitude}</p>
+							<p><strong>Longitude: </strong> {popupData.longitude}</p>
+							<h4>Location Tags:</h4>
+							<ul> 
+								{popupData.location.map(loc => (
+									<li>
+										{loc}
+									</li>
+								))}
+							</ul>
+							<h4>Tags:</h4>
+							<ul> 
+								{popupData.tags.map(tag => (
+									<li>
+										{tag}
+									</li>
+								))}
+							</ul>
+							
+						</div>
+						<img width="100%" src={popupData.photo_url}/>
+					</Popup>
+				)}
 			</Map>
 		</div>
 	)

@@ -11,7 +11,7 @@ const styles = {
 const PhotoCard = (props) => {
 	return <Card key={props.id}>
 		<h2>{props.name}</h2>
-		<Card.Img style={styles.cardImage} src={props.photo_url} alt={props.tags}/>
+		<Card.Img style={styles.cardImage} loading='lazy' src={props.photo_url} alt={props.tags}/>
 	</Card>
 }
 

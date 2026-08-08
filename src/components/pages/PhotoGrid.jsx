@@ -39,9 +39,9 @@ export default function PhotoGrid(props){
 	
 	return(
 		<div>
-			{photoList.length === 0 ? <h3>No Photos Found</h3> : (<Container fluid>
+			{photoList.length === 0 ? <h3>No Photos Found</h3> : (<Container fluid style={{width:"100%", padding:0}}>
 				<Row className="g-4">
-					{photoList.map(photo => <Col xs={12} sm={6} md={4} lg={3} xl={3} key={photo.id}>
+					{photoList.map(photo => <Col xs={12} sm={6} md={6} lg={4} xl={4} key={photo.id}>
 					<PhotoCard {...photo}/>
 					</Col> )}
 				</Row>
